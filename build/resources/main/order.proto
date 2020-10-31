@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package greet;
+
+option java_package = "de.proto.greet";
+option java_multiple_files = true;
+
+message Product {
+  string id = 1;
+  string productname = 2;
+  double price = 3;
+}
+
+message Order {
+  string OrderId = 1;
+  Product product = 2;
+
+}
+
+message ProductRequest {
+  string id = 1;
+}
+
+message ProductResponse {
+  string id = 1;
+  string productName = 2;
+  double price = 3;
+}
+
+message Orderrequest {
+  Product produkt = 1;
+}
+
+message OrderResponse {
+  string result = 1;
+}
+
+service OrderService {
+  rpc ShowProduct(ProductRequest) returns (ProductResponse) {};
+  rpc AddProductToOrder(Orderrequest) returns (OrderResponse) {};
+}
