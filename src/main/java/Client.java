@@ -21,7 +21,7 @@ public class Client {
         //created a service client (blocking - synchronous)
         OrderServiceGrpc.OrderServiceBlockingStub orderClient = OrderServiceGrpc.newBlockingStub(channel);
 
-/*
+
         // Unary
         ProductRequest productRequest = ProductRequest.newBuilder()
                 .setId("11")
@@ -35,7 +35,7 @@ public class Client {
         System.out.println("test");
 
         System.out.println(productResponse.getProductName());
-        System.out.println(productResponse.getPrice());*/
+        System.out.println(productResponse.getPrice());
 
         //Server Streaming
         Orderrequest orderrequest = Orderrequest.newBuilder()
