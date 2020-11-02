@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package greet;
+package order;
 
-option java_package = "de.proto.greet";
+option java_package = "de.proto.order";
 option java_multiple_files = true;
 
 message Product {
@@ -14,7 +14,6 @@ message Product {
 message Order {
   string OrderId = 1;
   Product product = 2;
-
 }
 
 message ProductRequest {
@@ -28,14 +27,14 @@ message ProductResponse {
 }
 
 message Orderrequest {
-  Product produkt = 1;
+  string id = 1;
 }
 
 message OrderResponse {
-  string result = 1;
+  Product product = 1;
 }
 
 service OrderService {
   rpc ShowProduct(ProductRequest) returns (ProductResponse) {};
-  rpc AddProductToOrder(Orderrequest) returns (OrderResponse) {};
+  rpc ShowOrder(Orderrequest) returns (stream OrderResponse) {};
 }

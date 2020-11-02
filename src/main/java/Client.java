@@ -1,10 +1,10 @@
 
-import de.proto.greet.OrderServiceGrpc;
-import de.proto.greet.ProductRequest;
-import de.proto.greet.ProductResponse;
+import de.proto.order.OrderServiceGrpc;
+import de.proto.order.Orderrequest;
+import de.proto.order.ProductRequest;
+import de.proto.order.ProductResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
 public class Client {
 
     public static void main(String[] args) {
@@ -18,11 +18,11 @@ public class Client {
         System.out.println("Creating stub");
 
 
-        //created a greet service client (blocking - synchronous)
+        //created a service client (blocking - synchronous)
         OrderServiceGrpc.OrderServiceBlockingStub orderClient = OrderServiceGrpc.newBlockingStub(channel);
 
-
-        //do the same for a greet Request
+/*
+        // Unary
         ProductRequest productRequest = ProductRequest.newBuilder()
                 .setId("11")
                 .build();
@@ -35,10 +35,18 @@ public class Client {
         System.out.println("test");
 
         System.out.println(productResponse.getProductName());
-        System.out.println(productResponse.getPrice());
+        System.out.println(productResponse.getPrice());*/
 
-        // do something
-        System.out.println("Shutting down channel");
+        //Server Streaming
+        Orderrequest orderrequest = Orderrequest.newBuilder()
+                .setId("1")
+                .build();
+
+        orderClient.showOrder(orderrequest)
+                .forEachRemaining(orderResponse -> {
+                    System.out.println(orderResponse.getProduct().toString());
+                });
+
 
         channel.shutdown();
     }
